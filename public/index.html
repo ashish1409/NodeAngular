@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Demo</title>
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/form-elements.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+ <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+</head>
+<body ng-controller="npmCtrl">
+    <video id="video-background"  poster="" src="" autoplay loop muted></video>
+    <ul id="playlist">
+        <li movieurl="media/1.mp4">Default</li>
+        <li movieurl="media/2.mp4">Sintel</li>
+    </ul>
+<div id="bgPattern" style="width: 100%; height: 100%;"></div>
+<!-- Header Start -->
+ <div class="" ng-show="showNav">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><b>S</b>hopping</a>
+
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a href="javascript:void(0)" ng-click="addToCartClick()">Cart</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input class="form-control" ng-model="query" type="text" placeholder="Filter by" autofocus>
+                        </div>
+
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div class="" ng-click="addToCartClick()">
+                                <button class="btn btn-default btn-lg btn-link" style="font-size:30px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                </button>
+                                <span class="badge badge-notify">{{cartCount}}</span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+<!-- Header End -->
+
+  <!-- add ng view -->
+
+<div class="top-content pos-rel">
+    <div class="inner-bg">
+      <div class="container">
+        <div class="library">
+            <div class="content" data-ng-view>{{showNav}}</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <!-- add ng view -->
+
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-route.min.js"></script>
+<script src="js/vendor/jquery-1.11.0.min.js"></script>
+<script src="js/vendor/ui-bootstrap.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script><!-- 
+<script src="js/jquery.backstretch.min"></script> -->
+
+<script src="js/app/app.js"></script>
+<script src="js/app/controller.js"></script>
+<script src="js/app/services.js"></script>
+<!--[if lt IE 10]>
+    <script src="assets/js/placeholder.js"></script>
+<![endif]-->
+<!-- video  -->
+<script type="text/javascript">
+    $(function() {
+        $("#playlist li").on("click", function() {
+            $("#video-background").attr({
+                "src": $(this).attr("movieurl"),
+                "poster": "",
+                "autoplay": "autoplay"
+            })
+        })
+        $("#video-background").attr({
+            "src": $("#playlist li").eq(0).attr("movieurl"),
+            "poster": $("#playlist li").eq(0).attr("moviesposter")
+        })
+    })
+
+</script>
+<!-- video -->
+<!-- slide player list -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+<!-- slide player list -->
+</body>
+
+</html>

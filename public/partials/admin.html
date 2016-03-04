@@ -1,0 +1,83 @@
+<!-- product list start -->
+<div class="container admin form-top ">
+ <H1>Add Product</H1>
+ <form  ng-submit="submitForm(formobj)">
+    
+
+
+
+
+
+      <input placeholder='product' type="text" name="product_name" autocomplete="off" ng-model="formobj.product"><br>
+      <input placeholder='Price' type="number" name="product_amount"  ng-model="formobj.name"><br>
+      <input placeholder='Description' type="text" name="product_description" ng-model="formobj.password"><br>
+      <input placeholder='Quantity' type="number" name="product_quantity"  min="0" max="5"  ng-model="formobj.profession"><br>
+
+
+
+
+
+
+
+
+
+
+      <input type="submit" class="btn btn-primary btn-sm"/>
+     Select File</button>
+
+
+ </form>
+ <div class="">
+    <table class="table table-bordered">
+      <thead>
+        <th> Product Id</th>
+        <th>Price</th>
+        <th>Password</th>
+        <th>Profession</th>
+        <th>Action</th>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="users in userdata">
+          <td>{{users.id}}</td>
+          <td>{{users.name}}</td>
+          <td>{{users.password }}</td>
+          <td>{{users.profession}}</td>
+          <td >
+          <a href="javascript:void(0)" ng-click="deleteUser(users , $index)" style="margin-right:10px">Delete</a>
+          <a href="javascript:void(0)" ng-click="EditUser(users , $index)">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+ </div>
+</div>
+<!-- product list end -->
+
+   
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit User</h4>
+      </div>
+      <form  ng-submit="editUserForm(editFormObj)" class="panel-body">
+        <input placeholder='Name' type="text" name="first_name" autocomplete="off" ng-model="editFormObj.name">  <br>
+        <input placeholder='Password' type="password" name="first_name" ng-model="editFormObj.password">  <br>
+        <input placeholder='Profession' type="text" name="first_name" autocomplete="off" ng-model="editFormObj.profession">  <br>
+        <input type="submit" value="Update" class="btn btn-primary btn-sm" />
+        <input type="button" value="Cancel" class="btn btn-primary btn-sm" data-dismiss="modal" style="margin-top:10px; " />
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
