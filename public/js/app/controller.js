@@ -7,6 +7,11 @@ app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', funct
   $scope.addToCartClick = function(){
       $location.path("/cart")
   }; 
+  $scope.logout = function(){
+     $location.path("/")
+  }
+
+
 
   npmservice.getData().then(function(res){
     $scope.userdata = res;
@@ -16,10 +21,6 @@ app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', funct
     }
 
   });
-//var formobjNew = [];
-
-
-
 
  $scope.submitForm = function(obj){
   console.log(obj)
@@ -39,6 +40,10 @@ app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', funct
     }
   }
 
+
+$scope.Logout = function(){
+  alert(0);
+  }
 
 
 

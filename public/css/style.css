@@ -255,13 +255,13 @@ div#bgPattern {
 #playlist {display:table;position: absolute;z-index: 2;color: #fff; font-size: 16px;    font-size: 20px;text-align: left; right: 0;
     background: #444;
     background: rgba(0, 0, 0, 0.35);  
-    height: 98%; margin: 68px 0 10px;
+    height: 100%; padding: 68px 20px 10px;
     
     text-align: left; }
 #playlist ul{ list-style: none; float: right; text-align: left;right: 0;}
 #playlist li{cursor:pointer;padding:8px;text-decoration: none;  list-style: none; }
 #playlist li:hover{color:yellow; }
-.navbar-default{border-radius: 0;}
+.navbar-default{border-radius: 0; z-index: 9}
 #nav {
     float: left;
     width: 280px;
@@ -290,3 +290,9 @@ div#bgPattern {
     background: #ececec;
     border-bottom: 1px dotted #ccc;
 }
+.navbar-default .btn-link{color: #777;}
+.navbar-default .btn-link:focus, .navbar-default .btn-link:hover {color: #333;}
+button.btn.no-color{background: inherit; padding: 6px 15px;}
+.badge-notify {background: red;position: relative;top: -8px;left: -32px; cursor: pointer;}
+.h38{height: 38px !important;}
+.thumbnail.new{display: inline-block; margin-bottom:0;  margin-right: 10px;}
