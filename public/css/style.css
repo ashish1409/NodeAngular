@@ -227,7 +227,7 @@ footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
 
 @media (max-width: 415px) {
 	
-	h1, h2 { font-size: 32px; }
+	h1, h2 { font-size: 20px; }
 
 }
 .table-bordered{color: #fff;}
