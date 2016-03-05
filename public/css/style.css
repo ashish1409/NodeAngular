@@ -247,7 +247,7 @@ footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
 .admin form input , .product form input{width: 100%;margin-bottom: 10px; color: #333;}
 div#bgPattern {
     display: block;
-    position: absolute;
+    position: fixed;
   	background: url('../images/pattern.png');
 	
 }
@@ -257,7 +257,8 @@ div#bgPattern {
     background: rgba(0, 0, 0, 0.35);  
     height: 100%; padding: 68px 20px 10px;
     
-    text-align: left; }
+    text-align: left;
+    display:none; }
 #playlist ul{ list-style: none; float: right; text-align: left;right: 0;}
 #playlist li{cursor:pointer;padding:8px;text-decoration: none;  list-style: none; }
 #playlist li:hover{color:yellow; }
@@ -296,3 +297,12 @@ button.btn.no-color{background: inherit; padding: 6px 15px;}
 .badge-notify {background: red;position: relative;top: -8px;left: -32px; cursor: pointer;}
 .h38{height: 38px !important;}
 .thumbnail.new{display: inline-block; margin-bottom:0;  margin-right: 10px;}
+.marb10{margin-bottom: 10px;}
+.col-w{color: #fff !important}
+.custom-in{float: left; width: inherit !important;}
+.second-button{
+    float:right;
+    padding: 7px !important
+}
+.product .caption , .cart table th ,.cart h1, .cart h3,.cart table tr td{color:#fff;}
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th{background-color: inherit;}

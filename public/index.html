@@ -46,12 +46,7 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                   <!--  <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input class="form-control " ng-model="query" type="text" placeholder="Filter by" autofocus>
-                        </div>
-
-                    </form> -->
+                  
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <div class="" ng-click="addToCartClick()">
@@ -61,7 +56,33 @@
                                 <span class="badge badge-notify">{{cartCount}}</span>
                             </div>
                         </li>
-                        <li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
+                        <li class="dropdown ">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Positions
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu mySelect">
+                                  <li><a href="#">Right</a></li>
+                                  <li><a href="#">Left</a></li>
+                                  <li><a href="#">Up</a></li>
+                                  <li><a href="#">down</a></li> 
+                                </ul>
+                              </li>
+
+
+                        <li>
+                        <!-- <select class="mySelect">
+                            <option value="right">Right</option>
+                            <option value="left">Left</option>            
+                            <option value="up">Up</option>
+                            <option value="down">Down</option>
+                        </select> --><!-- 
+                       <button id="button" class="myButton">Run Effect</button> -->
+                       <a href="#" id="button" type="button" class="btn second-button myButton btn-default navbar-btn">
+                          <span class="glyphicon glyphicon-th-list"></span>&nbsp; Themes
+                        </a>
+                       </li>
+                       <li><a href="#"><span class="glyphicon glyphicon-log-in" ng-click="logout()"></span> Logout</a></li>
+
+                       
 
                     </ul>
                 </div>
@@ -88,9 +109,13 @@
 <script src="lib/angular.min.js"></script>
 <script src="lib/angular-route.min.js"></script>
 <script src="js/vendor/jquery-1.11.0.min.js"></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></scr‌​ipt>
+
 <script src="js/vendor/ui-bootstrap.min.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script><!-- 
-<script src="js/jquery.backstretch.min"></script> -->
+<script src="js/vendor/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/vendor/ng-file-upload.min.js"></script>
+<script type="text/javascript" src="js/vendor/ng-file-upload-shim.min.js"></script>
 
 <script src="js/app/app.js"></script>
 <script src="js/app/controller.js"></script>
@@ -123,6 +148,24 @@ $(document).ready(function(){
 });
 </script>
 <!-- slide player list -->
+
+<!-- slider -->
+<script type="text/javascript">
+    $(".myButton").click(function () {
+
+    // Set the effect type
+    var effect = 'slide';
+
+    // Set the options for the effect type chosen
+    var options = { direction: $('.mySelect').val() };
+
+    // Set the duration (default: 400 milliseconds)
+    var duration = 500;
+
+    $('#playlist').toggle(effect, options, duration);
+});
+
+</script>
 </body>
 
 </html>

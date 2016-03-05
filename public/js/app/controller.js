@@ -1,6 +1,6 @@
 //main controller
-app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', function($scope, npmservice,$rootScope,$location){
-  
+app.controller('npmCtrl', ['$scope','npmService','Upload','$rootScope','$location','$window', function($scope, npmservice,Upload,$rootScope,$location,$window){
+    $scope.BaseImageUrl = $location.protocol()+'://'+$location.host()+':'+$location.port()+'/images/';
 // for cart count and nav bar
   $rootScope.showNav = false;
   $rootScope.cartCount  = 0;
@@ -11,25 +11,58 @@ app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', funct
      $location.path("/")
   }
 
-
-
   npmservice.getData().then(function(res){
     $scope.userdata = res;
-    console.log($scope.userdata)
+ //   console.log($scope.userdata)
     $scope.formobj = {
-      name : ""
+      product : ""
     }
 
   });
 
- $scope.submitForm = function(obj){
-  console.log(obj)
 
-    if(obj.name == ""){
+
+  $scope.upload = function (file,obj) {
+    //console.log($scope.file)
+      Upload.upload({
+          url: 'http://127.0.0.1:8081/upload', //webAPI exposed to upload the file
+          data:{file:file} //pass file as data, should be user ng-model
+      }).then(function (resp) { //upload function returns a promise
+     //   console.log('ghfghg', resp.data.fileDetails.filename)
+          if(resp.data.error_code === 0){ //validate success
+              //$window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+              if(resp.data.fileDetails.filename){
+                obj.ProfileImage = resp.data.fileDetails.filename
+              }else{
+                obj.ProfileImage = "default.png"
+              }
+              $scope.UploadData(obj);
+
+          } else {
+              $window.alert('an error occured');
+          }
+      }, function (resp) { //catch error
+          console.log('Error status: ' + resp.status);
+          //$window.alert('Error status: ' + resp.status);
+      }, function (evt) { 
+          //console.log(evt);
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+          $scope.progress = progressPercentage + '% '; // capture upload progress
+      });
+  };
+
+
+ $scope.submitForm = function(obj){
+    if (obj.file && obj.name !== "") { //check if from is valid
+        $scope.file = obj.file
+        $scope.upload($scope.file, obj); //call upload function
+    }
+    else if(obj.name == ""){
       alert("Please insert values")
     }
-    else{
-      obj["arrLength"] = Object.keys($scope.userdata).length
+  }
+ $scope.UploadData = function(obj){
       npmservice.postData(obj).then(function(res){  
       //console.log(res)  
         $scope.userdata = res;  
@@ -37,8 +70,7 @@ app.controller('npmCtrl', ['$scope','npmService','$rootScope','$location', funct
           $scope.formobj[k] = ""
         });   
       })
-    }
-  }
+};
 
 
 $scope.Logout = function(){
@@ -68,7 +100,6 @@ $scope.Logout = function(){
     $scope.userdata = res;  
     })
   }
-
   
 }])
 
@@ -105,16 +136,21 @@ registeredUsers();
   }
 //Pass value from function  and get from controller
 $scope.cartItems = [];
-   $scope.addToCart = function(productName,productDis,productPrice,productImg,qty, Id){     
+   $scope.addToCart = function(pid, product,price,description,quantity,ProfileImage,number, Ind){     
     $scope.cartItems.push({
-      "productId": "P1",
-      "productImg": productImg,
-      "productName": productName,
-      "productPrice": productPrice,
-      "productDis": productDis,
-      "qty":qty
+      "pid": "P1",
+      "product": product,
+      "price": price,
+      "description": description,
+      "quantity": quantity,
+      "ProfileImage": ProfileImage,
+      "Ind": Ind
     })
-    $scope.productId = Id
+
+
+
+
+    $scope.productId = pid
 
     //Define val of cart count
     $rootScope.cartCount = $scope.cartItems.length
@@ -135,7 +171,7 @@ $scope.cartItems = [];
   $scope.total = function() {
       var total = 0;
       angular.forEach($rootScope.cartItemsVal, function(item) {
-          total += item.productPrice*item.qty           
+          total += item.price*item.quantity           
       })
       return total;
    }
@@ -149,11 +185,6 @@ $scope.checkOutShopping = function(){
 
   var cartItemList = JSON.parse(window.localStorage.getItem('cartItemList'));
   $rootScope.cartItemsVal = cartItemList
-  console.log(cartItemList);
-
-  
+  console.log(cartItemList); 
 }
-
-
-
 }])

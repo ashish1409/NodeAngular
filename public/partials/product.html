@@ -5,19 +5,19 @@
      <H1 class="page-header">Product List</H1>
     </div>
     <ul>
-      <li ng-repeat="item in productListsCart | filter:query | orderBy: 'productName' ">
+      <li ng-repeat="item in productListsCart | filter:query | orderBy: 'product' ">
           <div class = "col-sm-6 col-md-3">
              <div class = "thumbnail">
-               <!-- <img ng-src = "{{item.productImg}}"> -->
-               <img ng-src = "../images/t4.png">
+               <img ng-src="{{BaseImageUrl}}{{item.ProfileImage}}"  style="margin-right: 10px; vertical-align: top"   />
              </div>
              <div class = "caption">
-             <h1>Product ID - {{item.id}}</h1>
-               <p>Product Price - {{item.name}}</p>
-               <h4>Product Description - {{item.password }}</h4>
-               <h4>Product Quantity - {{item.profession}}</h4>
+             <h1>Product ID - {{$index+1}}</h1>
+               <p>Product Name - {{item.product}}</p> 
+               <p>Product Price - {{item.price}}</p>
+               <h4>Product Description - {{item.description}}</h4>
+               <h4>Product Quantity - {{item.quantity}}</h4>
                <p>
-                <a href = "javascript:void(0);" class = "btn btn-primary" role = "button" ng-click="addToCart(item.id, item.productid, item.name, item.password ,item.profession,'1', $index)">
+                <a href = "javascript:void(0);" class = "btn btn-primary" role = "button" ng-click="addToCart(item.id, item.product, item.price ,item.description,item.quantity, item.ProfileImage,'1', $index)">
                  Add to cart
                </a> 
              </p>
@@ -27,6 +27,6 @@
     </ul>
 </div>
 <!-- product list end -->
-
+ 
 
 

@@ -10,13 +10,19 @@ app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     extended: true
 }));
-
+app.use(function(req, res, next) { //allow cross origin requests
+    res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 
 
 
 
 app.use(express.static('public'));
+app.use(express.static('node-module'));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -27,7 +33,9 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
+var upload = multer({ //multer settings
+    storage: storage
+}).single('file');
 
 // var upload = multer({
 //   dest: __dirname + '/public/images',
@@ -52,9 +60,10 @@ app.post('/post', function(req, res) {
     var objIndex = guid
     var user = {
 
-        "name": req.body.name,
-        "password": req.body.password,
-        "profession": req.body.profession,
+        "product": req.body.product,
+        "price": req.body.price,
+        "description": req.body.description,
+        "quantity": req.body.quantity,
         "id": objIndex,
         "ProfileImage": req.body.ProfileImage
     }
@@ -83,9 +92,19 @@ app.post('/post', function(req, res) {
 })
 
 
-app.post('/upload', upload.single('file'), function(req, res) {
- console.log(req.file)
- res.end(JSON.stringify(req.file));
+app.post('/upload',  function(req, res) {
+ 
+
+    upload(req,res,function(err){
+        //var fileDetails = JSON.stringify(req.file)
+        if(err){
+             res.json({error_code:1,err_desc:err});
+             return;
+        }
+        //console.log(req.file)
+         res.json({error_code:0,err_desc:null,fileDetails: req.file});
+         //res.end(JSON.stringify(req.file));
+    });
 })
 
 
@@ -124,11 +143,12 @@ app.post('/edit', function(req, res) {
     var editIndex = req.body.id;
 
     var userEdit = {
-        "name": req.body.name,
-        "password": req.body.password,
-        "profession": req.body.profession,
-        "id": editIndex,
-        "ProfileImage": ProfileImage
+        "product": req.body.product,
+        "price": req.body.price,
+        "description": req.body.description,
+        "quantity": req.body.quantity,
+        "id": objIndex,
+        "ProfileImage": req.body.ProfileImage
     }
     // First read existing users.
     fs.readFile(__dirname + "/" + "users.json", 'utf8', function(err, data) {

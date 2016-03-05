@@ -2,29 +2,46 @@
 <div class="container admin form-top ">
  <H1>Add Product</H1>
  <form  ng-submit="submitForm(formobj)">
-      <input placeholder='product' type="text" name="product_name" autocomplete="off" ng-model="formobj.product"><br>
-      <input placeholder='Price' type="number" name="product_amount"  ng-model="formobj.name"><br>
-      <input placeholder='Description' type="text" name="product_description" ng-model="formobj.password"><br>
-      <input placeholder='Quantity' type="number" name="product_quantity"  min="0" max="5"  ng-model="formobj.profession"><br>
+      <input placeholder='Product Name' type="text" name="product" autocomplete="off" ng-model="formobj.product"><br>
+
+
+      <input placeholder='Price' type="number" name="product"  ng-model="formobj.price"><br>
+      <input placeholder='Description' type="text" name="product" ng-model="formobj.description"><br>
+      <input placeholder='Quantity' type="number" name="product"  min="0" max="5"  ng-model="formobj.quantity"><br>
+
+      <input type="file" id="files" class="col-w custom-in" ngf-select ng-model="formobj.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+      <div class="marb10"><img style="width:120px; height:100px; " ng-show="formobj.file" ngf-thumbnail="formobj.file || 'images/thumb.jpg'"/></div>
+
+
+
+
+
+<!--       <div style="height: 10px; margin-top:10px; margin-bottom:10px; float: left; background: #EA4F4C; float: left; overflow: hidden; width: {{progress}}" xng-style="{'widht': progress}" >{{progress}}</div> -->
+
+
       <input type="submit" class="btn btn-primary btn-lg"/>
-     Select File</button>
+     
  </form>
  <div class="">
     <table class="table table-bordered">
       <thead>
-        <th> Product Id</th>
+        <th>Product View</th>
+        <th>Product Id</th>
+        <th>Product Name</th>
         <th>Price</th>
-        <th>Password</th>
-        <th>Profession</th>
+        <th>Description</th>
+        <th>Quantity</th>
         <th>Action</th>
       </thead>
 
       <tbody>
         <tr ng-repeat="users in userdata">
-          <td>{{users.id}}</td>
-          <td>{{users.name}}</td>
-          <td>{{users.password }}</td>
-          <td>{{users.profession}}</td>
+        <td><img ng-src="{{BaseImageUrl}}{{users.ProfileImage}}" width="100px" style="margin-right: 10px; vertical-align: top" /></td>
+          <td>{{$index+1}}</td>
+          <td>{{users.product}}</td>
+          <td>{{users.price}}</td>
+          <td>{{users.description}}</td>
+          <td>{{users.quantity}}</td>
           <td >
           <a href="javascript:void(0)" ng-click="deleteUser(users , $index)" style="margin-right:10px">Delete</a>
           <a href="javascript:void(0)" ng-click="EditUser(users , $index)">Edit</a>
@@ -35,31 +52,3 @@
  </div>
 </div>
 <!-- product list end -->
-
-   
-    <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit User</h4>
-      </div>
-      <form  ng-submit="editUserForm(editFormObj)" class="panel-body">
-        <input placeholder='Name' type="text" name="first_name" autocomplete="off" ng-model="editFormObj.name">  <br>
-        <input placeholder='Password' type="password" name="first_name" ng-model="editFormObj.password">  <br>
-        <input placeholder='Profession' type="text" name="first_name" autocomplete="off" ng-model="editFormObj.profession">  <br>
-        <input type="submit" value="Update" class="btn btn-primary btn-sm" />
-        <input type="button" value="Cancel" class="btn btn-primary btn-sm" data-dismiss="modal" style="margin-top:10px; " />
-      </form>
-
-    </div>
-
-  </div>
-</div>
-
-
-
-
